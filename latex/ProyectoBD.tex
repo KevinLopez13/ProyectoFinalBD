@@ -1,0 +1,226 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+\usepackage[top=2.5cm,bottom=2cm,left=1.8cm,right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{amssymb}
+\usepackage{floatrow}
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+\usepackage{xurl}
+\usepackage{pgfgantt}
+
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=black
+}
+
+\pagestyle{headings}
+
+% -- Estructura para insertar imagenes --
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.7\linewidth]{img/nombreImg}
+%	\caption{Descripción de la imagen.}
+%	\label{fig:alias}
+%\end{figure}
+
+% --
+
+\begin{document}
+	\newgeometry{top=2cm,bottom=2.5cm,left=1cm,right=1cm}
+	\begin{titlepage}
+		\centering
+		\begin{minipage}{0.14\linewidth}
+			\includegraphics[width=\linewidth]{img/shieldUnam}
+		\end{minipage}
+		\begin{minipage}{0.7\linewidth}
+			\centering
+			{\bfseries\large UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO \par}
+			%\vspace{1cm}
+			\vfill
+			{\scshape\Large Facultad de Ingeniería \par}
+			\vfill
+			%\vspace{0.7cm}
+			{\scshape\Large Ingeniería en Computación \par}
+		\end{minipage}
+		\begin{minipage}{0.14\linewidth}
+			\includegraphics[width=\linewidth]{img/shieldFi}
+		\end{minipage}
+		
+		\centering
+		\vspace{1.5cm}
+		{\scshape\Large Bases de Datos \par}
+		{\scshape\Large grupo: 01\par}
+		\vspace{3cm}
+		{\scshape\Huge Proyecto final \par}
+		\vspace{0.8cm}
+		%{\scshape\Huge fff \par}
+		\vfill
+		{\Large Alumnos: \par}
+		\begin{center}
+			\begin{tabular}{l}
+				$\bullet$ \\
+				\\
+				$\bullet$ \\
+				\\
+				$\bullet$ {\Large López González Kevin } \\
+				\\
+				$\bullet$ \\
+				\\
+				$\bullet$ \\
+			\end{tabular}
+		\end{center}
+		\vfill
+		{\Large Profesor: \par}
+		{\Large ING. Fernando Arreola Franco \par}
+		\vfill
+		{\Large \today \par}
+	\end{titlepage}
+
+	\restoregeometry
+	\tableofcontents
+	\section{Introducción}
+	
+	\section{Plan de trabajo}
+		\subsection{Descripción}
+		
+		\subsection{Plan de actividades}
+		%%\begin{center}
+		%%	\begin{tabular}
+				
+		%%	\end{tabular}
+		%%\end{center}
+		
+		\subsection{Cronograma}
+			\begin{ganttchart}[vgrid, x unit=7mm, time slot format=isodate,
+				canvas/.style={draw=none},
+				title/.append style={fill=blue!10, rounded corners=1mm},
+				group/.append style={draw=black, fill=magenta!60},
+				bar/.append style={fill=magenta!20}]
+				{2021-11-22}{2021-12-11}
+				\gantttitlecalendar{year, month=name, day} \\
+				
+				\ganttgroup{Diseño}{2021-11-22}{2021-11-24}\\
+				\ganttbar{M. Conceptual}{2021-11-22}{2021-11-22}\\
+				\ganttbar{M. Lógico}{2021-11-22}{2021-11-22} \\
+				\ganttbar{M. Físico}{2021-11-23}{2021-11-23} \\
+				\ganttbar{Revisión}{2021-11-24}{2021-11-24} \\
+				
+				\ganttgroup{Implementación}{2021-11-25}{2021-12-03}\\
+				\ganttbar{Base de datos}{2021-11-25}{2021-11-28}\\
+				\ganttbar{Revisión}{2021-11-29}{2021-11-29}\\
+				\ganttbar{Pruebas}{2021-11-30}{2021-12-03}\\
+				
+				\ganttgroup{Presentación}{2021-11-25}{2021-12-03}\\
+				\ganttbar{Página Web}{2021-11-25}{2021-11-28}\\
+				\ganttbar{Revisión}{2021-11-29}{2021-11-29}\\
+				\ganttbar{Pruebas}{2021-11-30}{2021-12-03}\\
+				
+				\ganttgroup{Acoplamiento}{2021-12-04}{2021-12-09}\\
+				\ganttbar{Desarrollo}{2021-12-04}{2021-12-06}\\
+				\ganttbar{Pruebas}{2021-12-07}{2021-12-09}\\
+				
+				\ganttbar{Documentación}{2021-11-22}{2021-12-09}
+			\end{ganttchart}
+
+				
+		\subsection{Aportaciones}
+	
+	\section{Diseño}
+		\subsection{Análisis de requerimientos}
+		
+		\subsection{Modelo conceptual}
+			\textbf{Entidades}\par 
+			\begin{itemize}
+				\item PROVEEDOR: \{\}
+				\item CLIENTE: \{\}
+				\item PRODUCTO: \{\}
+				\item VENTA : \{\}
+			\end{itemize}
+		
+			\textbf{Relaciones}\par
+			\begin{itemize}
+				\item Un ..
+				\item 
+			\end{itemize}
+			\subsubsection{Modelo Entidad-Relación}
+			
+		\subsection{Modelo lógico}
+			\subsubsection{Representación Intermedia}
+			\begin{itemize}
+				\item PROVEEDOR: \{ id\_proveedor smallint (PK), nombre varchar 50, razón social varchar 50, estado varchar 50, colonia varchar 50, numero smallint, cp smallint, calle varchar 50\}
+				\item TELEFONO: \{teléfono bigint(PK), id\_proveedor smallint (FK)\}
+				
+				\item INVENTARIO: \{id\_Inventario smallint (PK), precio\_compra decimal (10,2), stock smallint, fecha\_compra date \}
+				
+				\item SURTE: \{[id\_Provedor smaillint (FK), id\_Inventario smallint (FK)] (PK)\}
+				
+				\item PRODUCTO: \{cod\_barras integer PK, id\_categoria smallint FK, precio smallint NOT NULL, marca varchar(20) NOT NULL, descripcion varchar(50), id\_inventario smallint (FK)\}
+				
+				\item CATEGORÍA: \{ id\_categoria smallint PK, tipo varchar(20) NOT NULL\}
+				
+				\item CLIENTE: \{RFC varchar(13) (PK), nombre varchar(20), ap\_paterno varchar (20), ap\_materno varchar (20) (N), cp smallint, numero smallint, estado varchar (32), calle varchar (32), colonia varchar (32)\}
+				
+				\item EMAIL: \{RFC varchar(13) (FK), email varchar (64) (PK)\}
+				
+				\item VENTA: \{id\_venta int(PK), fecha\_venta date, pago\_final decimal(7,2), RFC varchar(13)(FK)\}
+				
+				\item CONTIENE: \{ [cod\_barras int , id\_venta int](PK)(FK), precioTotalArt decimal(7,2), cantidad articulo int\} 
+			\end{itemize}
+			
+			\subsubsection{Transformación de MER a MR}
+			
+			\subsubsection{Modelo Relacional}
+			
+			\subsubsection{Normalización}
+			
+		\subsection{Modelo físico}
+		
+			\subsubsection{IaaS}
+		
+	\section{Implementación}
+	
+		\subsection{Códigos}
+		
+		\subsection{DDL}
+	
+	\section{Presentación}
+		\subsection{Página Web}
+	
+	\section{Conclusiones}
+		\begin{itemize}
+			\item 
+				\subitem 
+				
+			\item López González Kevin
+				\subitem Bla bla bla
+
+			\item 
+				\subitem
+		\end{itemize}
+	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
