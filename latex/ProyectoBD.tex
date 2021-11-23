@@ -90,46 +90,52 @@
 		\subsection{Descripción}
 		
 		\subsection{Plan de actividades}
-		%%\begin{center}
-		%%	\begin{tabular}
-				
-		%%	\end{tabular}
-		%%\end{center}
-		
+
+		\newpage
 		\subsection{Cronograma}
 			\begin{ganttchart}[vgrid, x unit=7mm, time slot format=isodate,
 				canvas/.style={draw=none},
 				title/.append style={fill=blue!10, rounded corners=1mm},
 				group/.append style={draw=black, fill=magenta!60},
 				bar/.append style={fill=magenta!20}]
-				{2021-11-22}{2021-12-11}
+				{2021-11-21}{2021-12-09}
 				\gantttitlecalendar{year, month=name, day} \\
 				
-				\ganttgroup{Diseño}{2021-11-22}{2021-11-24}\\
-				\ganttbar{M. Conceptual}{2021-11-22}{2021-11-22}\\
-				\ganttbar{M. Lógico}{2021-11-22}{2021-11-22} \\
-				\ganttbar{M. Físico}{2021-11-23}{2021-11-23} \\
-				\ganttbar{Revisión}{2021-11-24}{2021-11-24} \\
+				\ganttgroup{Diseño}{2021-11-21}{2021-11-22}\\
+				\ganttbar{Modelo Conceptual}{2021-11-21}{2021-11-21}\\
+				\ganttbar{Modelo Lógico}{2021-11-21}{2021-11-21} \\
+				\ganttbar{Revisión}{2021-11-22}{2021-11-22} \\
 				
-				\ganttgroup{Implementación}{2021-11-25}{2021-12-03}\\
-				\ganttbar{Base de datos}{2021-11-25}{2021-11-28}\\
-				\ganttbar{Revisión}{2021-11-29}{2021-11-29}\\
-				\ganttbar{Pruebas}{2021-11-30}{2021-12-03}\\
+				\ganttgroup{Implementación}{2021-11-23}{2021-12-01}\\
+				\ganttbar{Modelo Físico}{2021-11-23}{2021-11-25}\\
+				\ganttbar{Revisión}{2021-11-26}{2021-11-26}\\
+				\ganttbar{Corrección de errores}{2021-11-27}{2021-11-29}\\
+				\ganttbar{Pruebas}{2021-11-30}{2021-12-01}\\
 				
-				\ganttgroup{Presentación}{2021-11-25}{2021-12-03}\\
-				\ganttbar{Página Web}{2021-11-25}{2021-11-28}\\
-				\ganttbar{Revisión}{2021-11-29}{2021-11-29}\\
-				\ganttbar{Pruebas}{2021-11-30}{2021-12-03}\\
+				\ganttgroup{Presentación}{2021-11-23}{2021-12-01}\\
+				\ganttbar{Página Web}{2021-11-23}{2021-11-25}\\
+				\ganttbar{Revisión}{2021-11-26}{2021-11-26}\\
+				\ganttbar{Corrección de errores}{2021-11-27}{2021-11-29}\\
+				\ganttbar{Pruebas}{2021-11-30}{2021-12-01}\\
 				
-				\ganttgroup{Acoplamiento}{2021-12-04}{2021-12-09}\\
-				\ganttbar{Desarrollo}{2021-12-04}{2021-12-06}\\
-				\ganttbar{Pruebas}{2021-12-07}{2021-12-09}\\
-				
-				\ganttbar{Documentación}{2021-11-22}{2021-12-09}
+				\ganttgroup{Acoplamiento}{2021-12-02}{2021-12-08}\\
+				\ganttbar{Desarrollo}{2021-12-02}{2021-12-04}\\
+				\ganttbar{Pruebas}{2021-12-05}{2021-12-05}\\
+				\ganttbar{Revisión}{2021-12-06}{2021-12-06}\\
+				\ganttbar{Corrección de errores}{2021-12-07}{2021-12-08}\\
+
+				\ganttbar{Documentación}{2021-11-22}{2021-12-08}
 			\end{ganttchart}
 
 				
 		\subsection{Aportaciones}
+		\begin{center}
+			\begin{tabular}{c|c|c|c|c|c}
+				\hline \\
+				& Diseño & Implementación & Presentación & Acoplamiento & Documentación \\
+				Kevin López & $\checkmark$ & & $\checkmark$ & $\checkmark$ & $\checkmark$ \\ 
+			\end{tabular}
+		\end{center}
 	
 	\section{Diseño}
 		\subsection{Análisis de requerimientos}
@@ -137,16 +143,25 @@
 		\subsection{Modelo conceptual}
 			\textbf{Entidades}\par 
 			\begin{itemize}
-				\item PROVEEDOR: \{\}
-				\item CLIENTE: \{\}
-				\item PRODUCTO: \{\}
-				\item VENTA : \{\}
+				\item PROVEEDOR: \{ \underline{id\_Proveedor}, razón social, domicilio (estado, código postal, colonia, calle y número), nombre, teléfonos \}
+				\item CLIENTE: \{\underline{RFC}, nomre (nombre, ap\_Paterno, ap\_Materno), domicilio (estado, código postal, colonia, calle y número), emails \}
+				\item INVENTARIO: \{\underline{id\_Inventario}, precio\_compra, fecha\_compra, cantidad\_ejemplares \}
+				
+				\item PRODUCTO: \{\underline{código\_Barras}, marca, descripción, precio, categoria\}
+				\item VENTA : \{\underline{num\_venta}, fecha\_venta, pago\_Total, cantidad\_articulo, pago\_total\_Articulo \}
 			\end{itemize}
 		
 			\textbf{Relaciones}\par
 			\begin{itemize}
-				\item Un ..
-				\item 
+				\item Un proveedor surte a muchos inventarios.
+				\item Un inventario es surtido por muchos proveedores. \\
+				\item Un inventario almacena muchos productos.
+				\item Un producto es almacenado por un inventario.\\
+				\item Una venta contiene muchos productos.
+				\item Un producto es contenido es muchas ventas.\\
+				\item Un cliente concreta muchas ventas.
+				\item Una venta es concretada por un cliente.
+				
 			\end{itemize}
 			\subsubsection{Modelo Entidad-Relación}
 			
@@ -178,12 +193,11 @@
 			\subsubsection{Modelo Relacional}
 			
 			\subsubsection{Normalización}
-			
+		
+	\section{Implementación}
 		\subsection{Modelo físico}
 		
 			\subsubsection{IaaS}
-		
-	\section{Implementación}
 	
 		\subsection{Códigos}
 		
