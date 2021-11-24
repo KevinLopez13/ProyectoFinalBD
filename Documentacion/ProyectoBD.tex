@@ -20,17 +20,6 @@
 
 \pagestyle{headings}
 
-% -- Estructura para insertar imagenes --
-
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.7\linewidth]{img/nombreImg}
-%	\caption{Descripción de la imagen.}
-%	\label{fig:alias}
-%\end{figure}
-
-% --
-
 \begin{document}
 	\newgeometry{top=2cm,bottom=2.5cm,left=1cm,right=1cm}
 	\begin{titlepage}
@@ -66,13 +55,13 @@
 			\begin{tabular}{l}
 				$\bullet$ \\
 				\\
-				$\bullet$ \\
+				$\bullet$ {\Large López Aniceto Saúl Isaac }\\
 				\\
 				$\bullet$ {\Large López González Kevin } \\
 				\\
 				$\bullet$ \\
 				\\
-				$\bullet$ \\
+				$\bullet$ {\Large Ponce Soriano Armando }\\
 			\end{tabular}
 		\end{center}
 		\vfill
@@ -211,7 +200,32 @@
 		\subsection{DDL}
 	
 	\section{Presentación}
-		\subsection{Página Web}
+		Una interfaz gráfica es un programa que nos permite manipular información a través de objetos gráficos que proporcionen un entorno visual, con el fin facilitar la interacción del usuario con la computadora.\par
+		En este caso, se optó por desarrollar una página web como interfaz gráfica que permita la manipulación de información de nuestra base de datos.
+		
+		\subsection{Django}
+		Django es un framework de Python de alto nivel que permite diseñar aplicaciones web de una forma rápida, limpia y pragmática. Además, ayuda a los desarrolladores a evitar muchos errores de seguridad comunes, como la inyección de SQL, las secuencias de comandos entre sitios, la falsificación de solicitudes entre sitios y el secuestro de clics.
+			
+			\subsubsection{Mapeo Relacional de Objetos}
+			El Mapeo Relacional de Objetos o ORM (\textit{Object Relational Mapping}), es una tecnología que soluciona el desajuste entre las bases de datos relacionales y orientadas a objetos.\par 
+			Por lo general, asigna una clase a una tabla uno a uno. Cada instancia de la clase corresponde a un registro en la tabla y cada atributo de la clase corresponde a cada campo en la tabla. ORM proporciona una asignación a la base de datos, en lugar de escribir código SQL directamente, solo es necesario manipular los datos de la base de datos como un objeto operativo.\par 
+			Si bien, el ORM es una herrmienta muy util, no se utilizará en este proyecto, ya que preferimos escribir directamente la sentencia SQL para comunicarnos con la base de datos.
+			
+			\subsubsection{Ejecutar SQL personalizado directamente}
+			El objeto \textbf{django.db.connection} representa la conexión por defecto entre django y la base de datos. Las funciones que utilizamos para la comunicación con la base de datos son las siguientes:
+			\begin{itemize}
+				\item \textbf{connection.cursor()}
+					\subitem Para obtener un objeto cursor.
+					
+				\item \textbf{cursor.execute(sql, [params])}
+					\subitem Para ejecutar sentencias SQL.
+					
+				\item \textbf{cursor.fetchall()}
+					\subitem Para devolver las filas resultantes de la consulta.
+			\end{itemize}
+		
+		\subsection{Diseño}
+		
 	
 	\section{Conclusiones}
 		\begin{itemize}
