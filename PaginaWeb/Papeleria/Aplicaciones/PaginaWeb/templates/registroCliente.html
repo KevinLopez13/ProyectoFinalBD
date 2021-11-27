@@ -1,0 +1,97 @@
+{% extends "./base.html" %}
+
+{% block title %} Registro de Cliente {% endblock %}
+
+{% block body %}
+
+<div class="card">
+<div class="card-body">
+<h3>Registro de cliente</h3>
+<form class="needs-validation" novalidate>
+
+    <div class="form-group row ">
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom01">Nombre</label>
+        <input type="text" name="txtNombre" class="form-control" id="vc01" maxlength="32" autocomplete="none" required>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom02">Apellido Paterno</label>
+        <input type="text" name="txtPat" class="form-control" id="vc02" maxlength="32" autocomplete="none"required>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="validationCustom03">Apellido Materno</label>
+        <input type="text" name="txtMat" class="form-control" id="vc03" maxlength="32" autocomplete="none" >
+      </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-4 mb-3">
+            <label for="validationCustom04">RFC</label>
+            <input type="text" id="vc04" name="txtRfc" class="form-control" minlength="13" maxlength="13" autocomplete="none"required>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="validationCustomUsername">Correo</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+              </div>
+              <input type="text" class="form-control" id="validationCustomUsername" placeholder="nombre@ejemplo.com" aria-describedby="inputGroupPrepend" maxlength="64" autocomplete="none"required>
+            </div>
+          </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-6 mb-3">
+        <label for="validationCustom05">Calle</label>
+        <input type="text" id="vc05" name="txtCalle" class="form-control" maxlength="32" autocomplete="none" required>
+      </div>
+    </div>
+    
+    <div class="form-group row">
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom06">Colonia</label>
+        <input type="text" id="vc06" name="txtCol" class="form-control" maxlength="32" autocomplete="none" required>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationCustom07">CP</label>
+        <input type="text" id="vc07" name="numCp" class="form-control" maxlength="5" autocomplete="none" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom08">Estado</label>
+          <input type="text" id="vc08" name="txtEdo" class="form-control" maxlength="32" autocomplete="none" required>
+        </div>
+      </div>
+
+    <button class="btn btn-primary" type="submit">Registrar</button>
+  </form>
+  
+  <script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+</div>
+</div>
+
+{% endblock %}
