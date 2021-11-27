@@ -11,62 +11,76 @@
 
     <div class="form-group row ">
       <div class="col-md-4 mb-3">
-        <label for="validationCustom01">Nombre</label>
-        <input type="text" name="txtNombre" class="form-control" id="vc01" maxlength="32" autocomplete="none" required>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fNombre" placeholder="Nombre" maxlength="32" required >
+          <label for="floatingInput">Nombre</label>
+        </div>
       </div>
 
       <div class="col-md-4 mb-3">
-        <label for="validationCustom02">Apellido Paterno</label>
-        <input type="text" name="txtPat" class="form-control" id="vc02" maxlength="32" autocomplete="none"required>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fAp-Pa" placeholder="Apellido Paterno" maxlength="32" required >
+          <label for="floatingInput">Apellido Paterno</label>
+        </div>
       </div>
 
       <div class="col-md-4 mb-3">
-        <label for="validationCustom03">Apellido Materno</label>
-        <input type="text" name="txtMat" class="form-control" id="vc03" maxlength="32" autocomplete="none" >
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fAp-Ma" placeholder="Apellido Materno" maxlength="32" >
+          <label for="floatingInput">Apellido Materno</label>
+        </div>
       </div>
     </div>
 
     <div class="form-group row">
         <div class="col-md-4 mb-3">
-            <label for="validationCustom04">RFC</label>
-            <input type="text" id="vc04" name="txtRfc" class="form-control" minlength="13" maxlength="13" autocomplete="none"required>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
+            <label for="floatingInput">RFC</label>
+          </div>
         </div>
 
         <div class="col-md-4 mb-3">
-            <label for="validationCustomUsername">Correo</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupPrepend">@</span>
-              </div>
-              <input type="text" class="form-control" id="validationCustomUsername" placeholder="nombre@ejemplo.com" aria-describedby="inputGroupPrepend" maxlength="64" autocomplete="none"required>
-            </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="fCorreo" placeholder="Correo" maxlength="64" required >
+            <label for="floatingInput">Correo</label>
           </div>
+        </div>
     </div>
 
     <div class="form-group">
       <div class="col-md-6 mb-3">
-        <label for="validationCustom05">Calle</label>
-        <input type="text" id="vc05" name="txtCalle" class="form-control" maxlength="32" autocomplete="none" required>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fCalle" placeholder="Calle" maxlength="32" required >
+          <label for="floatingInput">Calle</label>
+        </div>
       </div>
     </div>
     
     <div class="form-group row">
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom06">Colonia</label>
-        <input type="text" id="vc06" name="txtCol" class="form-control" maxlength="32" autocomplete="none" required>
+      <div class="col-md-4 mb-3">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fColonia" placeholder="Colonia"  maxlength="32" required >
+          <label for="floatingInput">Colonia</label>
+        </div>
       </div>
-      <div class="col-md-3 mb-3">
-        <label for="validationCustom07">CP</label>
-        <input type="text" id="vc07" name="numCp" class="form-control" maxlength="5" autocomplete="none" required>
+      <div class="col-md-2 mb-3">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fCp" placeholder="Código postal" minlength="5" maxlength="5" required >
+          <label for="floatingInput">Código postal</label>
+        </div>
       </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-6 mb-3">
-          <label for="validationCustom08">Estado</label>
-          <input type="text" id="vc08" name="txtEdo" class="form-control" maxlength="32" autocomplete="none" required>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="fEstado" placeholder="Estado" maxlength="32" required >
+            <label for="floatingInput">Estado</label>
+          </div>
         </div>
-      </div>
+    </div>
+    
 
     <button class="btn btn-primary" type="submit">Registrar</button>
   </form>

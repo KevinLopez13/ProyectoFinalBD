@@ -1,0 +1,59 @@
+{% extends "./base.html" %}
+
+{% block title %} Análisis de Ventas {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h3>Análisis de ventas</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card border-primary py-2">
+              <div class="card-body">
+                <p class="card-text">Ingrese una fecha o una fecha de inicio y una fecha de fin.</p>
+                <form>
+                  <div class="form-group mb-3">
+                    <label for="floatingInput">Fecha de inicio</label>
+                    <input type="date" class="form-control" id="floatingDateStart" placeholder="dd/mm/aaaa" required>
+                  </div>
+                  <div class="form-group mb-3">
+                        <label for="floatingInput">Fecha de fin</label>
+                        <input type="date" class="form-control" id="floatingDateEnd" placeholder="dd/mm/aaaa" >
+                  </div>
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary" type="submit"><i class="bi-calculator"></i> Calcular </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-sm-6">
+            <div class="card border-success">
+                <div class="card-body">
+                    <h5>Resumen</h5>
+                    <!--<p class="card-text">Información del producto.</p>-->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Periodo de tiempo</th>
+                            <th scope="col">Cantidad vendida</th>
+                            <th scope="col">Ganancia total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>10/99/99 - 18/18/18</td>
+                            <td>58</td>
+                            <td>$6850</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

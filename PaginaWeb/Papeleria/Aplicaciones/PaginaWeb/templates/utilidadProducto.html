@@ -1,0 +1,55 @@
+{% extends "./base.html" %}
+
+{% block title %} Utilidad de un producto {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h3>Utilidad de un producto</h3>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card border-primary py-2">
+                <div class="card-body">
+                    <p class="card-text">Ingrese el código de barras de un producto para obtener su utilidad.</p>
+                    <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingCodBar" placeholder="Código de barras" required >
+                        <label for="floatingInput">Código de Barras</label>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-primary" type="submit"><i class="bi-calculator"></i> Calcular </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card border-success">
+                <div class="card-body">
+                    <h5>Resumen</h5>
+                    <!--<p class="card-text">Información del producto.</p>-->
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Utilidad</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>9999</td>
+                            <td>Lápiz</td>
+                            <td>$98</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

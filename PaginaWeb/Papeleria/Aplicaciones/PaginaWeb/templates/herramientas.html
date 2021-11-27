@@ -1,0 +1,53 @@
+{% extends "./base.html" %}
+
+{% block title %} Herramientas {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h3>Herramientas</h3>
+    <div class="row">
+        <div class="col-sm-3">
+          <div class="card border-primary">
+            <div class="card-body">
+              <h5 class="card-title">Utilidad</h5>
+              <p class="card-text">Obtenga la utlidad de un producto.</p>
+              <a href="/utilidadProducto" class="btn btn-primary">Ir</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card border-primary">
+            <div class="card-body">
+              <h5 class="card-title">Análisis de ventas</h5>
+              <p class="card-text">Obtenga la cantidad y ganancias de las ventas realizadas en un periodo de tiempo.</p>
+              <a href="/analisisVentas" class="btn btn-primary">Ir</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card border-primary">
+              <div class="card-body">
+                <h5 class="card-title">Revisión de inventario</h5>
+                <p class="card-text">Conozca los productos que estan por agotarse.</p>
+                <a href="/revisionInventario" class="btn btn-primary">Ir</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card border-primary">
+              <div class="card-body">
+                <h5 class="card-title">Facturas</h5>
+                <p class="card-text">Obtenga la información de una factura.</p>
+                <a href="#" class="btn btn-primary">Ir</a>
+              </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
