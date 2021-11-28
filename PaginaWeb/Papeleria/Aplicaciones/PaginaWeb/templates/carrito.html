@@ -1,0 +1,49 @@
+{% extends "./base.html" %}
+
+{% block title %} Mi Carrito {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Mi Carrito</h3>
+            <div class="card border-primary py-2">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col-2">Código</th>
+                            <th scope="col-2">Descripción</th>
+                            <th scope="col-2">Precio Unitario</th>
+                            <th scope="col-2">Cantidad</th>
+                            <th scope="col-2">Precio Total</th>
+                            <th scope="col-2">Eliminar del carrito</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>9999</td>
+                            <td>Lápiz de madera 2B casfsdgs</td>
+                            <td>$2.00</td>
+                            <td> <form>
+                                <div class="col-5 mx-auto">
+                                    <input type="number" class="form-control" id="inputCant" value="1" min="1" required >
+                                </div>
+                            </form> </td>
+                            <td>$2.00</td>
+                            <td><a href="/miCarrito" class="btn btn-danger"><i class="bi-trash"></i></a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <form action="/miCarrito">
+                        <button class="btn btn-primary" type="submit">Comprar</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

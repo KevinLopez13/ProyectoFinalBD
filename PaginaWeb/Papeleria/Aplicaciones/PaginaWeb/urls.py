@@ -7,5 +7,7 @@ urlpatterns = [
     path('herramientas/', views.herramientas),
     path('utilidadProducto/',views.utilidadProducto),
     path('analisisVentas/',views.analisisVentas),
-    path('revisionInventario/',views.revisionInventario)
+    path('revisionInventario/',views.revisionInventario),
+    path('miCarrito/',views.carrito),
+    path('tienda/',views.tienda)
 ]
