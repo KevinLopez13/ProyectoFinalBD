@@ -25,3 +25,6 @@ def carrito(request):
 
 def tienda(request):
     return render(request, 'tienda.html')
+
+def cliente(request):
+    return render(request, 'clienteventa.html')
