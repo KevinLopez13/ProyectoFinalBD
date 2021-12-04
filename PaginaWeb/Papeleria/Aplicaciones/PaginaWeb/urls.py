@@ -10,5 +10,6 @@ urlpatterns = [
     path('revisionInventario/',views.revisionInventario),
     path('miCarrito/',views.carrito),
     path('tienda/',views.tienda),
-    path('cliente/',views.cliente)
+    path('cliente/',views.cliente),
+    path('factura/',views.factura)
 ]

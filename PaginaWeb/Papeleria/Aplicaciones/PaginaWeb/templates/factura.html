@@ -1,0 +1,46 @@
+{% extends "./base.html" %}
+
+{% block title %} Factura {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h3>Factura</h3>
+    <div class="row">
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Factura</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">La papeleria de papel.</h6>
+
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Detalles</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Precio Importe</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>9999</td>
+                            <td>Lápiz</td>
+                            <td>$98</td>
+                            <td>$98</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="card border-primary text-end mx-3">
+                    <div class="card-body">
+                        <p>Total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -28,3 +28,6 @@ def tienda(request):
 
 def cliente(request):
     return render(request, 'clienteventa.html')
+
+def factura(request):
+    return render(request, 'factura.html')

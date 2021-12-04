@@ -4,7 +4,7 @@
 -- Project :      Proyecto.DM1
 -- Author :       IsaacLopez117
 --
--- Date Created : Thursday, November 25, 2021 20:40:01
+-- Date Created : Saturday, December 04, 2021 17:51:46
 -- Target DBMS : IBM DB2 UDB 8.x
 --
 
@@ -16,7 +16,8 @@ CREATE TABLE Categoria(
     id_Categoria    SMALLINT       NOT NULL,
     tipo            VARCHAR(20)    NOT NULL,
     CONSTRAINT PK10 PRIMARY KEY (id_Categoria)
-);
+)
+;
 
 
 
@@ -30,12 +31,13 @@ CREATE TABLE Cliente(
     ap_Paterno    VARCHAR(32)    NOT NULL,
     ap_Materno    VARCHAR(32),
     cp            SMALLINT       NOT NULL,
-    numero        SMALLINT       NOT NULL,
     estado        VARCHAR(32)    NOT NULL,
     calle         VARCHAR(32)    NOT NULL,
     colonia       VARCHAR(32)    NOT NULL,
     CONSTRAINT PK2 PRIMARY KEY (RFC)
-);
+)
+;
+
 
 
 -- 
@@ -43,24 +45,42 @@ CREATE TABLE Cliente(
 --
 
 CREATE TABLE Contiene(
-    cod_Barras           BIGINT          NOT NULL,
-    id_Venta             VARCHAR(32)          NOT NULL,
+    cod_Barras           INTEGER          NOT NULL,
+    id_Venta             INTEGER          NOT NULL,
     precio_Total_Art     DECIMAL(7, 2)    NOT NULL,
     cantidad_Articulo    INTEGER          NOT NULL,
     CONSTRAINT PK4 PRIMARY KEY (cod_Barras, id_Venta)
-);
+)
+;
+
 
 
 -- 
--- TABLE: Email
+-- TABLE: Correo 
 --
 
-CREATE TABLE Email(
+CREATE TABLE Correo(
     email    VARCHAR(64)    NOT NULL,
     RFC      VARCHAR(13)    NOT NULL,
     CONSTRAINT PK1 PRIMARY KEY (email)
-);
+)
+;
 
+
+
+-- 
+-- TABLE: Guarda 
+--
+
+CREATE TABLE Guarda(
+    id_Inventario    SMALLINT         NOT NULL,
+    cod_Barras       INTEGER          NOT NULL,
+    precio_Compra    DECIMAL(7, 2)    NOT NULL,
+    stock            INTEGER          NOT NULL,
+    fecha_Compra     DATE             NOT NULL,
+    CONSTRAINT PK12 PRIMARY KEY (id_Inventario, cod_Barras)
+)
+;
 
 
 
@@ -69,12 +89,12 @@ CREATE TABLE Email(
 --
 
 CREATE TABLE Inventario(
-    id_Inventario    SMALLINT          NOT NULL,
-    precio_Compra    DECIMAL(10, 2)    NOT NULL,
-    stock            SMALLINT          NOT NULL,
-    fecha_Compra     DATE              NOT NULL,
+    id_Inventario    SMALLINT       NOT NULL,
+    nombre           VARCHAR(32),
     CONSTRAINT PK9 PRIMARY KEY (id_Inventario)
-);
+)
+;
+
 
 
 -- 
@@ -82,14 +102,15 @@ CREATE TABLE Inventario(
 --
 
 CREATE TABLE Producto(
-    cod_Barras       BIGINT          NOT NULL,
-    precio           DECIMAL(7, 2)    NOT NULL,
-    marca            VARCHAR(120)     NOT NULL,
-    descripcion      VARCHAR(50)      NOT NULL,
-    id_Categoria     SMALLINT         NOT NULL,
-    id_Inventario    SMALLINT         NOT NULL,
+    cod_Barras      INTEGER          NOT NULL,
+    precio          DECIMAL(7, 2)    NOT NULL,
+    marca           VARCHAR(120)     NOT NULL,
+    descripcion     VARCHAR(50)      NOT NULL,
+    id_Categoria    SMALLINT         NOT NULL,
     CONSTRAINT PK5 PRIMARY KEY (cod_Barras)
-);
+)
+;
+
 
 
 -- 
@@ -106,7 +127,8 @@ CREATE TABLE Proveedor(
     cp              SMALLINT       NOT NULL,
     calle           VARCHAR(50)    NOT NULL,
     CONSTRAINT PK7 PRIMARY KEY (id_Proveedor)
-);
+)
+;
 
 
 
@@ -118,18 +140,22 @@ CREATE TABLE Surte(
     id_Proveedor     SMALLINT    NOT NULL,
     id_Inventario    SMALLINT    NOT NULL,
     CONSTRAINT PK8 PRIMARY KEY (id_Proveedor, id_Inventario)
-);
+)
+;
+
 
 
 -- 
--- TABLE: Telefono 
+-- TABLE: Telefeno 
 --
 
-CREATE TABLE Telefono(
+CREATE TABLE Telefeno(
     num_Telefono    BIGINT      NOT NULL,
     id_Proveedor    SMALLINT    NOT NULL,
     CONSTRAINT PK6 PRIMARY KEY (num_Telefono)
-);
+)
+;
+
 
 
 -- 
@@ -137,12 +163,13 @@ CREATE TABLE Telefono(
 --
 
 CREATE TABLE Venta(
-    id_Venta       VARCHAR (32)          NOT NULL,
+    id_Venta       INTEGER          NOT NULL,
     fecha_Venta    DATE             NOT NULL,
     pago_Final     DECIMAL(7, 2)    NOT NULL,
-    RFC      VARCHAR(13)    NOT NULL,
+    RFC            VARCHAR(13)      NOT NULL,
     CONSTRAINT PK3 PRIMARY KEY (id_Venta)
-);
+)
+;
 
 
 
@@ -162,23 +189,33 @@ ALTER TABLE Contiene ADD CONSTRAINT RefProducto5
 
 
 -- 
--- TABLE: EMAIL
+-- TABLE: Correo 
 --
 
-ALTER TABLE EMAIL ADD CONSTRAINT RefCliente2 
+ALTER TABLE Correo ADD CONSTRAINT RefCliente2 
     FOREIGN KEY (RFC)
     REFERENCES Cliente(RFC)
 ;
 
 
 -- 
--- TABLE: Producto 
+-- TABLE: Guarda 
 --
 
-ALTER TABLE Producto ADD CONSTRAINT RefInventario9 
+ALTER TABLE Guarda ADD CONSTRAINT RefInventario11 
     FOREIGN KEY (id_Inventario)
     REFERENCES Inventario(id_Inventario)
 ;
+
+ALTER TABLE Guarda ADD CONSTRAINT RefProducto12 
+    FOREIGN KEY (cod_Barras)
+    REFERENCES Producto(cod_Barras)
+;
+
+
+-- 
+-- TABLE: Producto 
+--
 
 ALTER TABLE Producto ADD CONSTRAINT RefCategoria10 
     FOREIGN KEY (id_Categoria)
@@ -205,7 +242,7 @@ ALTER TABLE Surte ADD CONSTRAINT RefInventario7
 -- TABLE: Telefeno 
 --
 
-ALTER TABLE Telefono ADD CONSTRAINT RefProveedor8 
+ALTER TABLE Telefeno ADD CONSTRAINT RefProveedor8 
     FOREIGN KEY (id_Proveedor)
     REFERENCES Proveedor(id_Proveedor)
 ;
