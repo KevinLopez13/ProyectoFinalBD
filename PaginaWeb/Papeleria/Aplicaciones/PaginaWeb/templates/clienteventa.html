@@ -11,33 +11,18 @@
           <h3>Cliente</h3>
           <div class="card border-primary py-2">
               <div class=" card-body" >
-                  <form class="needs-validation" novalidate>
-                    <div class="form-group row ">
-                      <div class="col">
-                        <h6>Buscar Cliente</h6>
-                        <div class="input-group my-3">
-                          <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
-                          <div class="input-group-btn">
-                              <button class="btn btn-inline" type="submit"><i class="bi-search"></i></button>
+                    <form class="needs-validation" novalidate action="/factura"> 
+                        <p>Ingrese el RFC del cliente que realiza la compra:</p>
+                        <div class="form-group col">
+                          <div class="form-floating">
+                            <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
+                            <label for="floatingInput">RFC</label>
+                          </div>
+                          <div class="input-group-btn my-3">
+                              <button class="btn btn-primary" type="submit">Siguiente</button>
                           </div>
                         </div>
-                    </form>
-                    <form class="needs-validation" novalidate> 
-                        <h6>Datos del Cliente</h6>
-                        <div class="input-group-btn my-3">
-                            <label>RFC</label>
-                            <input type="text" class="form-control" id="cRFC" maxlength="13" readonly required >    
-                        </div>
-                        <div class="input-group-btn my-3">
-                            <label>Nombre</label>
-                            <input type="text" class="form-control" id="cNombre" maxlength="32" readonly required>
-                        </div>
-                        <div class="input-group-btn my-3">
-                            <button class="btn btn-primary" href="#" type="submit">Siguiente</button>
-                        </div>
-                      </div>
-                  </form>
-
+                    </form> 
                   <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
                     (function() {
