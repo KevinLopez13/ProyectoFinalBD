@@ -9,7 +9,7 @@
 <h3>Registro de cliente</h3>
 <form class="needs-validation" novalidate>
 
-    <div class="form-group row ">
+    <div class="form-group row mx-2">
       <div class="col-md-4 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" id="fNombre" placeholder="Nombre" maxlength="32" required >
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row mx-2">
         <div class="col-md-4 mb-3">
           <div class="form-floating">
             <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
@@ -40,49 +40,46 @@
           </div>
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-8 mb-3">
           <div class="form-floating">
-            <input type="text" class="form-control" id="fCorreo" placeholder="Correo" maxlength="64" required >
+            <input type="email" class="form-control" id="fCorreo" placeholder="Correo" maxlength="64" required >
             <label for="floatingInput">Correo</label>
           </div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group row mx-2">
       <div class="col-md-6 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" id="fCalle" placeholder="Calle" maxlength="32" required >
           <label for="floatingInput">Calle</label>
         </div>
       </div>
-    </div>
-    
-    <div class="form-group row">
-      <div class="col-md-4 mb-3">
+      <div class="col-md-6 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" id="fColonia" placeholder="Colonia"  maxlength="32" required >
           <label for="floatingInput">Colonia</label>
         </div>
       </div>
-      <div class="col-md-2 mb-3">
+    </div>
+    
+    <div class="form-group row mx-2">
+      <div class="col-md-6 mb-3">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="fEstado" placeholder="Estado" maxlength="32" required >
+          <label for="floatingInput">Estado</label>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" id="fCp" placeholder="Código postal" minlength="5" maxlength="5" required >
           <label for="floatingInput">Código postal</label>
         </div>
       </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-6 mb-3">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="fEstado" placeholder="Estado" maxlength="32" required >
-            <label for="floatingInput">Estado</label>
-          </div>
-        </div>
-    </div>
     
 
-    <button class="btn btn-primary" type="submit">Registrar</button>
+    <button class="btn btn-primary mx-3" type="submit">Registrar</button>
   </form>
   
   <script>

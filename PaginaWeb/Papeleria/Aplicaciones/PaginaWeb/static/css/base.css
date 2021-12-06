@@ -1,5 +1,11 @@
 
+font-family:'Ubuntu', sans-serif;
+
 th,td{
     text-align: center;
     vertical-align: middle;
+}
+
+body,div{
+    background-color: #954adb;
 }

@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 def home(request):
     return render(request,'home.html')
 
-def registrarCliente(request):
-    return render(request,'registroCliente.html')
+def formularioCliente(request):
+    return render(request,'formularioCliente.html')
 
 def herramientas(request):
     return render(request,'herramientas.html')
