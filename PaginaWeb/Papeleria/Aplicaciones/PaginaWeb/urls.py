@@ -11,5 +11,8 @@ urlpatterns = [
     path('miCarrito/',views.carrito),
     path('tienda/',views.tienda),
     path('cliente/',views.cliente),
-    path('factura/',views.factura)
+    path('clienteError/',views.clienteError),      
+    path('validaCliente/', views.validaCliente),  
+    path('factura/',views.factura),
+    path('eliminacionArticulo/', views.eliminar_Articulo)
 ]

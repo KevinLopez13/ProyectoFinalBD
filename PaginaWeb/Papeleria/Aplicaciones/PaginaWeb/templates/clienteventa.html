@@ -11,43 +11,46 @@
           <h3>Cliente</h3>
           <div class="card py-2">
               <div class=" card-body" >
-                    <form class="needs-validation" novalidate action="/factura"> 
+                    <form class="needs-validation" novalidate action="/validaCliente/" method="POST"> {% csrf_token %}
                         <p>Ingrese el RFC del cliente que realiza la compra:</p>
                         <div class="form-group col">
                           <div class="form-floating">
-                            <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
+                            <input type="text" name="txtRFC" class="form-control" placeholder="RFC" minlength="13" maxlength="13" required >
                             <label for="floatingInput">RFC</label>
                           </div>
                           <div class="input-group-btn my-3">
-                              <button class="btn btn-primary" type="submit">Siguiente</button>
+                            <a href="/miCarrito" class="btn btn-secondary">Regresar</a>  
+                            <button class="btn btn-primary" type="submit">Siguiente</button>
                           </div>
                         </div>
-                    </form> 
-                  <script>
-                    // Example starter JavaScript for disabling form submissions if there are invalid fields
-                    (function() {
-                      'use strict';
-                      window.addEventListener('load', function() {
-                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                        var forms = document.getElementsByClassName('needs-validation');
-                        // Loop over them and prevent submission
-                        var validation = Array.prototype.filter.call(forms, function(form) {
-                          form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                              event.preventDefault();
-                              event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                          }, false);
-                        });
-                      }, false);
-                    })();
-                    </script>
+                    </form>
               </div>
           </div>
         </div>
 
     </div>
 </div>
+{% block scripts %}
 
+{% endblock %}
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
 {% endblock %}
