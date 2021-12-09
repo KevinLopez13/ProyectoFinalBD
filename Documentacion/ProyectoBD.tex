@@ -53,13 +53,13 @@
 		{\Large Alumnos: \par}
 		\begin{center}
 			\begin{tabular}{l}
-				$\bullet$ \\
+				$\bullet$ {\Large Fonseca Huitrón Julise}\\
 				\\
 				$\bullet$ {\Large López Aniceto Saúl Isaac }\\
 				\\
 				$\bullet$ {\Large López González Kevin } \\
 				\\
-				$\bullet$ \\
+				$\bullet$ {\Large Martínez Vázquez Diego}\\
 				\\
 				$\bullet$ {\Large Ponce Soriano Armando }\\
 			\end{tabular}
@@ -76,12 +76,13 @@
 
 	\newpage
 	\section{Introducción}
+	Este proyecto consiste en diseñar y crear una base de datos que utilizará una cadena de papelerías en la que se puede manipular y almacenar la información de todos los productos que esta cadena ofrece. La base de datos tendrá como finalidad llevar de manera	ordenada y controlada la logística que la papelería sigue para tener control de todos los servicios que ofrece, así como llevar un control de las transacciones y accesos. Este proyecto también contempla la creación de una página web para que los usuarios de esta,	tengan acceso a funciones que se desarrollan en la base de datos y se pueda ver de una forma gráfica. El desarrollo de esta base de datos será detallado en el presente documento con la finalidad de explicar los procedimientos, planes y metodologías que se fueron utilizadas para llevar a cabo este proyecto. Este proyecto fue elaborado en POSTGRESQL, utilizando los recursos de PHP y Amazon Web Services.
 	
 	\section{Plan de trabajo}
 		\subsection{Descripción}
-		
+			El plan de trabajo utilizado para el desarrollo de este proyecto consiste, principalmente, en asignar tareas específicas a todos los participantes, con base en el establecimiento de metas y fechas.
 		\subsection{Plan de actividades}
-
+			Se desarrolla un cronograma estableciendo cada una de las fases que involucra la creación y desarrollo del sistema, asignando fechas y un límite de tiempo para cada tarea. En la parte de asignaciones, se asigna a cada uno de los integrantes una tarea referida en el cronograma y que forma parte de la elaboración de este proyecto.
 		\newpage
 		\subsection{Cronograma}
 			\begin{ganttchart}[vgrid, x unit=7mm, time slot format=isodate,
@@ -129,8 +130,12 @@
 	
 	\section{Diseño}
 		\subsection{Análisis de requerimientos}
-		
+			Para la elaboración de la base de datos se contempla que una papelería tendrá una serie de registros que a su vez tendrán información, se requiere almacenar información de los proveedores, se requiere almacenar información sobre un Inventario que almacena también información. Se deberá guardar información detallada de cada venta realizada. Requerimos también toda la información relacionada con el cliente y también información específica del o los tipos de producto que tenemos a la venta.
+			Los requerimientos antes mencionados nos llevan a conceptualizar más las ideas, encontrando que hay dependencias en algunos de ellos, nos lleva a analizar la cardinalidad que hay entre las tablas. El análisis de estos requerimientos es la base para la construcción de nuestros modelo EntidadRelación y en general de todo el modelo Conceptual.
+			
 		\subsection{Modelo conceptual}
+			Gracias al análisis de requerimientos hecho anteriormente, pudimos llevara a cabo el modelo conceptual, donde obtuvimos de manera más clara las entidades y las relaciones que hay para realizar el Modelo Entidad-Relación.
+			
 			\textbf{Entidades}\par 
 			\begin{itemize}
 				\item PROVEEDOR: \{ \underline{id\_Proveedor}, razón social, domicilio (estado, código postal, colonia, calle y número), nombre, teléfonos \}
@@ -163,6 +168,9 @@
 			
 		\subsection{Modelo lógico}
 			\subsubsection{Representación Intermedia}
+				Realizando el Modelo Entidad-Relación, pudimos seguir las reglas para de la transformación de
+				MER a MR, nos derivó en las siguientes tablas:
+				
 			\begin{itemize}
 				\item PROVEEDOR: \{ id\_proveedor smallint (PK), nombre varchar 50, razón social varchar 50, estado varchar 50, colonia varchar 50, numero smallint, cp smallint, calle varchar 50\}
 				\item TELEFONO: \{teléfono bigint(PK), id\_proveedor smallint (FK)\}
@@ -185,13 +193,50 @@
 			\end{itemize}
 			
 			\subsubsection{Transformación de MER a MR}
-			
+				Para la transformación de Modelo Entidad Relación a Modelo Relacional, primero debemos utilizar la transformación intermedia que obtuvimos y desarrollamos. Una vez finalizado ese procedimiento utilizamos las reglas para la trasformación de MER a MR y obtendremos nuestro modelo relacional.
 			\subsubsection{Modelo Relacional}
 			
 			\subsubsection{Normalización}
 		
 	\section{Implementación}
+		Para llevar a cabo la implementación de esta base de datos, primero tendremos que crear la base de datos en el manejador POSTGRESQL.8 Una vez finalizada la creación de la base de datos, tendremos que crear las tablas que obtuvimos en nuestro modelo relacional. Estas tablas tendrán que tener sus respectivos constraints para las
+		llevas primarias y foráneas que se utilizan en toda la base de datos. Cuando las tablas estén creadas en las base de datos, podremos verificar su utilidad haciendo
+		inserciones de prueba. Para que el sistema resuelva cuando se reciba un código de barras regrese la utilidad, para que cuando haya la venta de un artículo y se decremente el stock por la cantidad vendida, dada una fecha o una fecha de inicio y de fin, regrese la cantidad total que se vendió y su ganancia correspondiente. Para obtener el nombre de aquellos productos que están es stock, que de forma	automática genere vista que contenga información para desplegar una factura de compra y la creación del índice. Para todas esas funciones mencionadas, tendremos que hacer uso de la creación de Functions, Procedures y Triggers.
+		
 		\subsection{Modelo físico}
+			Para el desarrollo de la base de datos y su implementación, tendremos que trabajar con la creación de tablas y sus respectivas inserciones en el manejador, tendremos que utilizar la programación en base de datos para que se logren hacer las funciones que se nos solicitan. Lo primero que realizamos fue la creación de tablas, que a su vez son las mismas que obtuvimos del Modelo Relacional, las tablas que creamos son las que se ilustran a continuación:
+		
+		%imagenes
+		
+		También para comprobar que la creación de estas tablas fue correcta, tuvimos que realizar inserciones que tuvieran relación con estas tablas. Las inserciones que realizamos son las siguientes:
+		
+		%imagenes
+		
+		Para lograr obtener las funciones solicitadas en los requerimientos, tendremos que utilizar la programación en base de datos. Lo que realizamos fue para cada uno de los puntos que tenemos en los requerimientos. Cabe aclarar que estas funciones, luego tendrán que ir acompañadas de triggers, para que al momento de usar estas funciones, sea de manera inmediata.
+		Función que retorna la utilidad.
+		- El primer requerimiento de las funcione nos pide que al recibir un código de barras de un producto, este regrese la utilidad, en este caso la utilidad represente el precio al que el producto es ofertado menos el precio al que el producto fue adquirido al proveedor.
+		
+		%imagen
+		
+		Las siguientes Functions, representan al requerimiento que nos solicita dada una fecha, o fecha de inicio y fecha de fin se nos solicita regresar la cantidad del total que se vendió y la ganancia correspondiente.
+		
+		Función para retornar pagos finales
+		
+		%imagen
+		
+		Función para retornar pagos finales entre fechas
+		
+		%imagen
+		
+		Función para retornar las ganancias
+		
+		%imagen
+		
+		Función para retornar las ganancias por fechas
+		
+		%imagen
+		
+		
 		
 			\subsubsection{IaaS}
 	
