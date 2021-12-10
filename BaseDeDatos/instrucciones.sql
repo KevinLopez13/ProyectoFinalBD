@@ -1,3 +1,13 @@
+--Vista tipo factura
+CREATE VIEW FACTURA
+AS 
+SELECT Cliente.RFC, Cliente.nombre, Cliente.ap_Paterno, Cliente.ap_Materno, Cliente.cp, 
+Cliente.calle, Cliente.colonia, Venta.id_Venta, Venta.fecha_Venta, Venta.pago_Final, 
+Contiene.precio_Total_Art, Contiene.cantidad_Articulo, Producto.marca, Producto.descripcion FROM CLIENTE 
+INNER JOIN VENTA ON CLIENTE.RFC=VENTA.RFC INNER JOIN CONTIENE ON VENTA.id_Venta=CONTIENE.id_Venta 
+INNER JOIN PRODUCTO ON CONTIENE.cod_Barras=PRODUCTO.cod_Barras;
+
+
 --Retornar info del producto que haya menos de 3 en stock
 CREATE OR REPLACE FUNCTION menos_Thr() RETURNS TABLE (stock integer, marca varchar, descripcion varchar)
 AS $$
@@ -13,32 +23,23 @@ END;
 $$
 LANGUAGE plpgsql;
 
---Vista tipo factura
-CREATE VIEW FACTURA
-AS 
-SELECT Cliente.RFC, Cliente.nombre, Cliente.ap_Paterno, Cliente.ap_Materno, Cliente.cp, 
-Cliente.calle, Cliente.colonia, Venta.id_Venta, Venta.fecha_Venta, Venta.pago_Final, 
-Contiene.precio_Total_Art, Contiene.cantidad_Articulo, Producto.marca, Producto.descripcion FROM CLIENTE 
-INNER JOIN VENTA ON CLIENTE.RFC=VENTA.RFC INNER JOIN CONTIENE ON VENTA.id_Venta=CONTIENE.id_Venta 
-INNER JOIN PRODUCTO ON CONTIENE.cod_Barras=PRODUCTO.cod_Barras;
 
---Indice de venta
-CREATE INDEX id_Vent ON VENTA(id_Venta);
+--Retorno del ultimo id_Venta generado
+CREATE OR REPLACE FUNCTION id_Venta_Funcion() RETURNS integer
+AS
+$$
+DECLARE 
+V_id integer;
+BEGIN
+SELECT last_value INTO V_id FROM VENT;
+RETURN V_id;
+end;
+$$
+LANGUAGE plpgsql;
 
---Secuencia para id_Vent
-CREATE SEQUENCE Vent
-START WITH 0
-INCREMENT BY 1
-MINVALUE 0
-MAXVALUE 10
-CYCLE;
-
---Modificaciones a la tabla venta
-ALTER TABLE Venta ALTER id_Venta SET DEFAULT NEXTVAL('Vent');
-ALTER TABLE Venta ALTER fecha_Venta SET DEFAULT current_date;
 
 --Procedimiento para verificar stock
-CREATE OR REPLACE FUNCTION existe() RETURNS TRIGGER AS $existe$
+CREATE OR REPLACE FUNCTION venta() RETURNS TRIGGER AS $existe$
 DECLARE decremento integer;
 BEGIN 
 decremento= new.cantidad_Articulo;
@@ -58,9 +59,6 @@ RETURN NULL;
 END;
 $existe$ LANGUAGE plpgsql;
 
-CREATE TRIGGER existe AFTER INSERT
-ON CONTIENE FOR EACH ROW
-EXECUTE PROCEDURE existe();
 
 --FUNTCION para la utilidad de cada producto
 CREATE OR REPLACE FUNCTION retorna_Utilidad(codigo INT)RETURNS DECIMAL(7,2) AS
@@ -79,6 +77,7 @@ END;
 $$
 LANGUAGE plpgsql;
 
+
 --FUNCTION para retornar los pagos finales
 CREATE OR REPLACE FUNCTION retorna_Pago_Final(fecha DATE)RETURNS DECIMAL(7,2) AS
 $$
@@ -94,6 +93,7 @@ END;
 $$
 LANGUAGE plpgsql;
 
+
 --FUNCTION para retornar los pagos finales entre fechas
 CREATE OR REPLACE FUNCTION retorna_Pago_Final(fecha_inicio DATE, fecha_fin DATE)RETURNS DECIMAL(7,2) AS
 $$
@@ -106,6 +106,7 @@ RETURN v_Pago;
 END;
 $$
 LANGUAGE plpgsql;
+
 
 --FUNCTION para retornar las ganancias
 CREATE OR REPLACE FUNCTION retorna_Pago_Ganancia(fecha DATE)RETURNS DECIMAL(7,2) AS
@@ -126,6 +127,7 @@ RETURN v_Ganancia;
 END;
 $$
 LANGUAGE plpgsql;
+
 
 --FUNCTION para retornar las ganancias por fechas
 CREATE OR REPLACE FUNCTION retorna_Pago_Ganancia(fecha_inicio DATE, fecha_fin DATE)RETURNS DECIMAL(7,2) AS
@@ -148,6 +150,13 @@ RETURN v_Ganancia;
 END;
 $$
 LANGUAGE plpgsql;
+
+
+--Trigger para venta
+CREATE TRIGGER venta_trigger INSTEAD OF INSERT
+ON CONTIENE FOR EACH ROW
+EXECUTE PROCEDURE venta();
+
 
 --Llamada de funciones
 SELECT retorna_Utilidad(53204);

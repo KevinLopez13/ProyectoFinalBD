@@ -137,3 +137,15 @@ ALTER TABLE Venta ADD CONSTRAINT RefCliente3
     FOREIGN KEY (RFC)
     REFERENCES Cliente(RFC)
 ;
+
+--Secuencia para id_Vent
+CREATE SEQUENCE Vent
+START WITH 1
+INCREMENT BY 1;
+
+--Indice de venta
+CREATE INDEX id_Vent ON VENTA(id_Venta);
+
+--Modificaciones a la tabla venta
+ALTER TABLE Venta ALTER id_Venta SET DEFAULT NEXTVAL('Vent');
+ALTER TABLE Venta ALTER fecha_Venta SET DEFAULT current_date;
