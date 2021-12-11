@@ -3,15 +3,12 @@ from django.db import models
 # Create your models here.
 
 class producto():
-    def __init__(self, codigo, precio, marca, desc, id_inv, id_cat):
-        self.codigo = int(codigo)
-        self.precio = float(precio)
-        self.marca = marca
-        self.desc = desc
-        self.id_inv = int(id_inv)
-        self.id_cat = int(id_cat)
-
-
+    def __init__(self, registro) -> None:
+        self.codigo = registro[0]
+        self.precio = registro[1]
+        self.marca = registro[2]
+        self.descripcion = registro[3]
+        self.id_cat = registro[4]
 
 class venta():
     def __init__(self, id_Venta, rfc):
@@ -50,5 +47,3 @@ class carrito():
 
     def __str__(self):
         return str(self.canasta)
-
-    

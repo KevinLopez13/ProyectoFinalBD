@@ -7,26 +7,26 @@
 <div class="card">
 <div class="card-body">
 <h3>Registro de cliente</h3>
-<form class="needs-validation" novalidate>
+<form class="needs-validation" novalidate action="/formularioCliente/" method="post"> {% csrf_token %}
 
     <div class="form-group row mx-2">
       <div class="col-md-4 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fNombre" placeholder="Nombre" maxlength="32" required >
+          <input type="text" class="form-control" name="txtNombre" id="fNombre" placeholder="Nombre" maxlength="32" required >
           <label for="floatingInput">Nombre</label>
         </div>
       </div>
 
       <div class="col-md-4 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fAp-Pa" placeholder="Apellido Paterno" maxlength="32" required >
+          <input type="text" class="form-control" name="txtApP" id="fAp-Pa" placeholder="Apellido Paterno" maxlength="32" required >
           <label for="floatingInput">Apellido Paterno</label>
         </div>
       </div>
 
       <div class="col-md-4 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fAp-Ma" placeholder="Apellido Materno" maxlength="32" >
+          <input type="text" class="form-control" name="txtApM" id="fAp-Ma" placeholder="Apellido Materno" maxlength="32" >
           <label for="floatingInput">Apellido Materno</label>
         </div>
       </div>
@@ -35,14 +35,14 @@
     <div class="form-group row mx-2">
         <div class="col-md-4 mb-3">
           <div class="form-floating">
-            <input type="text" class="form-control" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
+            <input type="text" class="form-control" name="txtRFC" id="fRfc" placeholder="RFC" minlength="13" maxlength="13" required >
             <label for="floatingInput">RFC</label>
           </div>
         </div>
 
         <div class="col-md-8 mb-3">
           <div class="form-floating">
-            <input type="email" class="form-control" id="fCorreo" placeholder="Correo" maxlength="64" required >
+            <input type="email" class="form-control" name="emCorreo" id="fCorreo" placeholder="Correo" maxlength="64" required >
             <label for="floatingInput">Correo</label>
           </div>
         </div>
@@ -51,13 +51,13 @@
     <div class="form-group row mx-2">
       <div class="col-md-6 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fCalle" placeholder="Calle" maxlength="32" required >
+          <input type="text" class="form-control" name="txtCalle" id="fCalle" placeholder="Calle" maxlength="32" required >
           <label for="floatingInput">Calle</label>
         </div>
       </div>
       <div class="col-md-6 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fColonia" placeholder="Colonia"  maxlength="32" required >
+          <input type="text" class="form-control" name="txtColonia" id="fColonia" placeholder="Colonia"  maxlength="32" required >
           <label for="floatingInput">Colonia</label>
         </div>
       </div>
@@ -66,13 +66,13 @@
     <div class="form-group row mx-2">
       <div class="col-md-6 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fEstado" placeholder="Estado" maxlength="32" required >
+          <input type="text" class="form-control" name="txtEstado" id="fEstado" placeholder="Estado" maxlength="32" required >
           <label for="floatingInput">Estado</label>
         </div>
       </div>
       <div class="col-md-6 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" id="fCp" placeholder="Código postal" minlength="5" maxlength="5" required >
+          <input type="text" class="form-control" name="txtCP" id="fCp" placeholder="Código postal" minlength="5" maxlength="5" required >
           <label for="floatingInput">Código postal</label>
         </div>
       </div>

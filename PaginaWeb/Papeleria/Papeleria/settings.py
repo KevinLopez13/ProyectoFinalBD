@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'Papeleria.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pp1',
+        'NAME': 'pp2',
         'USER': 'kevin',
         'PASSWORD': '123',
         'HOST': '127.0.0.1',

@@ -6,6 +6,7 @@ urlpatterns = [
     path('formularioCliente/',views.formularioCliente),
     path('herramientas/', views.herramientas),
     path('utilidadProducto/',views.utilidadProducto),
+    path('calculaUtilidad/',views.calculaUtilidad),
     path('analisisVentas/',views.analisisVentas),
     path('revisionInventario/',views.revisionInventario),
     path('miCarrito/',views.carrito),

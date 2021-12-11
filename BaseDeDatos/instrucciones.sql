@@ -12,13 +12,13 @@ INNER JOIN PRODUCTO ON CONTIENE.cod_Barras=PRODUCTO.cod_Barras;
 CREATE OR REPLACE FUNCTION menos_Thr() RETURNS TABLE (stock integer, marca varchar, descripcion varchar)
 AS $$
 DECLARE
-v_stock integer;
-nom_Marca varchar(120);
+    v_stock integer;
+    nom_Marca varchar(120);
 BEGIN
-RETURN QUERY EXECUTE
-'SELECT stock, marca, descripcion FROM guarda LEFT JOIN producto
-ON guarda.cod_Barras=producto.cod_Barras 
-WHERE stock <= 3';
+    RETURN QUERY EXECUTE
+    'SELECT stock, marca, descripcion FROM guarda LEFT JOIN producto
+    ON guarda.cod_Barras=producto.cod_Barras 
+    WHERE stock <= 3';
 END;
 $$
 LANGUAGE plpgsql;
@@ -29,33 +29,34 @@ CREATE OR REPLACE FUNCTION id_Venta_Funcion() RETURNS integer
 AS
 $$
 DECLARE 
-V_id integer;
+    V_id integer;
 BEGIN
-SELECT last_value INTO V_id FROM VENT;
-RETURN V_id;
-end;
+    SELECT last_value INTO V_id FROM VENT;
+    RETURN V_id;
+END;
 $$
 LANGUAGE plpgsql;
 
 
 --Procedimiento para verificar stock
 CREATE OR REPLACE FUNCTION venta() RETURNS TRIGGER AS $existe$
-DECLARE decremento integer;
+DECLARE
+    decremento integer;
 BEGIN 
-decremento= new.cantidad_Articulo;
-IF (select stock FROM guarda WHERE cod_Barras = NEW.cod_Barras) < decremento THEN 
-raise notice 'No hay suficiente producto';
-ROLLBACK; 
-RETURN stock;
-END IF;
-IF (select stock FROM guarda where cod_Barras = NEW.cod_Barras ) >= decremento THEN
-UPDATE guarda SET stock= ((SELECT stock FROM guarda WHERE cod_Barras=             NEW.cod_Barras) - decremento) WHERE cod_Barras = NEW.cod_Barras;
-IF (select stock FROM guarda where  cod_Barras = NEW.cod_Barras ) <= 3 THEN
-raise notice 'stock actualizado, REVISE SU INVENTARIO';
-END IF;
-RETURN NULL;
-END IF; 
-RETURN NULL;
+    decremento= new.cantidad_Articulo;
+    IF (select stock FROM guarda WHERE cod_Barras = NEW.cod_Barras) < decremento THEN 
+        raise notice 'No hay suficiente producto';
+        ROLLBACK; 
+        RETURN stock;
+    END IF;
+    IF (select stock FROM guarda where cod_Barras = NEW.cod_Barras ) >= decremento THEN
+        UPDATE guarda SET stock= ((SELECT stock FROM guarda WHERE cod_Barras=NEW.cod_Barras) - decremento) WHERE cod_Barras = NEW.cod_Barras;
+        IF (select stock FROM guarda where  cod_Barras = NEW.cod_Barras ) <= 3 THEN
+            raise notice 'stock actualizado, REVISE SU INVENTARIO';
+        END IF;
+        RETURN NULL;
+    END IF; 
+    RETURN NULL;
 END;
 $existe$ LANGUAGE plpgsql;
 
@@ -153,24 +154,24 @@ LANGUAGE plpgsql;
 
 
 --Trigger para venta
-CREATE TRIGGER venta_trigger INSTEAD OF INSERT
+CREATE TRIGGER venta_trigger before INSERT
 ON CONTIENE FOR EACH ROW
 EXECUTE PROCEDURE venta();
 
 
 --Llamada de funciones
-SELECT retorna_Utilidad(53204);
+--SELECT retorna_Utilidad(53204);
 
-SELECT menos_Thr();
+--SELECT menos_Thr();
 
-SELECT * FROM FACTURA WHERE RFC = 'GEC85014014I2';
+--SELECT * FROM FACTURA WHERE RFC = 'GEC85014014I2';
 
-SELECT retorna_Pago_Final('2021-10-24');
-SELECT retorna_Pago_Final('2021-10-20','2021-11-30');
+--SELECT retorna_Pago_Final('2021-10-24');
+--SELECT retorna_Pago_Final('2021-10-20','2021-11-30');
 
-SELECT retorna_Pago_Ganancia('2021-11-24');
-SELECT retorna_Pago_Ganancia('2021-10-20','2021-10-30');
+--SELECT retorna_Pago_Ganancia('2021-11-24');
+--SELECT retorna_Pago_Ganancia('2021-10-20','2021-10-30');
 
-INSERT INTO CONTIENE VALUES (53205,004,9500.50,3);
+--INSERT INTO CONTIENE VALUES (53205,004,9500.50,3);
 
-INSERT INTO Venta(pago_final,RFC) VALUES(9500.50, 'GEC85014014I1');
+--INSERT INTO Venta(pago_final,RFC) VALUES(9500.50, 'GEC85014014I1');

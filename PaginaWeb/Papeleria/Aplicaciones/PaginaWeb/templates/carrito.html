@@ -25,18 +25,20 @@
                           </tr>
                         </thead>
                         <tbody>
+                          {% for p in productos %}
                           <tr>
-                            <td>9999</td>
-                            <td>Lápiz de madera 2B casfsdgs</td>
-                            <td>$2.00</td>
-                            <td> <form>
-                                <div class="col-5 mx-auto">
-                                    <input type="number" class="form-control" id="inputCant" value="1" min="1" required >
-                                </div>
-                            </form> </td>
-                            <td>$2.00</td>
-                            <td><a href="/eliminacionArticulo" class="btn btn-danger btnEliminar"><i class="bi-trash"></i></a></td>
+                          <td>{{p.codigo}}</td>
+                          <td>{{p.descripcion}}</td>
+                          <td>{{p.precio}}</td>
+                          <td> <form>
+                            <div class="col-5 mx-auto">
+                                <input type="number" class="form-control" id="inputCant" value="1" min="1" required >
+                            </div>
+                          </form> </td>
+                          <td>{{p.precioTotal}}</td>
+                          <td><a href="/eliminacionArticulo" class="btn btn-danger btnEliminar"><i class="bi-trash"></i></a></td>
                           </tr>
+                          {% endfor %}
                         </tbody>
                       </table>
                       <form action="/cliente">

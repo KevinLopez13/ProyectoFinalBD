@@ -11,9 +11,9 @@
             <div class="card border-primary py-2">
                 <div class="card-body">
                     <p class="card-text">Ingrese el código de barras de un producto para obtener su utilidad.</p>
-                    <form>
+                    <form action="/calculaUtilidad/" method="POST"> {% csrf_token %}
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingCodBar" placeholder="Código de barras" minlength="5" maxlength="5" required >
+                        <input type="text" class="form-control" name="txtCodBarras" placeholder="Código de barras" minlength="5" maxlength="5" required >
                         <label for="floatingInput">Código de Barras</label>
                     </div>
                     <div class="d-grid gap-2 col-6 mx-auto">
@@ -39,9 +39,9 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td>9999</td>
-                            <td>Lápiz</td>
-                            <td>$98</td>
+                            <td>{{codigo}}</td>
+                            <td>{{descripcion}}</td>
+                            <td>{{utilidad}}</td>
                           </tr>
                         </tbody>
                       </table>
