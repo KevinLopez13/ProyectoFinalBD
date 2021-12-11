@@ -2,6 +2,19 @@ from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib import messages
 
+class categoria():
+    def __init__(self,id,tipo) -> None:
+        self.id = id
+        self.tipo = tipo
+
+class producto():
+    def __init__(self, registro) -> None:
+        self.codigo = registro[0]
+        self.precio = registro[1]
+        self.marca = registro[2]
+        self.descripcion = registro[3]
+        self.id_cat = registro[4]
+        self.id_inv = registro[5]
 
 # Create your views here.
 
@@ -36,8 +49,33 @@ def eliminar_Articulo(request):
 
 # Modulos de la vista de tienda
 
-def tienda(request):
-    return render(request, 'tienda.html')
+def tienda(request, cat):
+    categorias = []
+    productos = []
+    categ = "Todos los productos"
+    categoriasSQL = None
+    productosSQL = None
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM categoria;")
+        categoriasSQL = cursor.fetchall()
+
+        if cat == 0:
+            cursor.execute("SELECT * FROM producto;")
+        else:
+            cursor.execute("SELECT tipo FROM categoria WHERE id_categoria=%s;",[cat])
+            categ, = cursor.fetchone()
+            cursor.execute("SELECT * FROM producto WHERE id_categoria=%s;",[cat])
+        productosSQL = cursor.fetchall()
+        
+    for c in categoriasSQL:
+        id, tipo = c
+        categorias.append( categoria(id, tipo) )
+
+    for p in productosSQL:
+        productos.append( producto(p) )
+    
+    return render(request, 'categoria.html',{'categoria':categ,'categorias':categorias, 'productos':productos})
 
 def cliente(request):
     return render(request, 'clienteventa.html')

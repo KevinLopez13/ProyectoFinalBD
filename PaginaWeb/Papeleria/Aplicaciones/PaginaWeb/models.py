@@ -12,6 +12,7 @@ class producto():
         self.id_cat = int(id_cat)
 
 
+
 class venta():
     def __init__(self, id_Venta, rfc):
         self.id_venta = id_Venta

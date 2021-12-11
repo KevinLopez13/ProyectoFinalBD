@@ -1,0 +1,45 @@
+{% extends "./base.html" %}
+
+{% block title %} Categorias {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+            <h4>Categorías</h4>
+            <nav class="nav flex-column">
+                {% for c in categorias %}
+                <a class="nav-link" aria-current="page" href="/tienda/{{c.id}}">{{c.tipo}}</a>
+                {% endfor %}
+              </nav>
+        </div>
+        <div class="col-sm-8">
+            <h3>{{categoria}}</h3>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Añadir al carrito</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for p in productos %}
+                  <tr>
+                    <td>{{p.codigo}}</td>
+                    <td>{{p.descripcion}}</td>
+                    <td>{{p.marca}}</td>
+                    <td>{{p.precio}}</td>
+                    <td><a href="/tienda" class="btn btn-primary"><i class="bi-cart3"></i></a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
