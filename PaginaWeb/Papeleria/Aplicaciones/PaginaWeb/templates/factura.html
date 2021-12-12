@@ -12,25 +12,23 @@
 
                     <div class="row mx-2 my-4">
                       <h3 class="card-title">Factura</h3>
-                      <h4 class="card-subtitle mb-2 text-muted">La papeleria de papel.</h4>
+                      <h4 class="card-subtitle mb-2 text-muted">Papel & Lápiz.</h4>
                     </div>
                     
                     <div class="row mx-2">
                       <div class="col">
                         <p><b>FACTURAR A:</b><br>
-                          Nombre Appellido Appellido <br>
-                          RFC<br>
-                          Ciudad, cp<br>
-                          Telefono
+                          Nombre: {{cliente.nombre}} {{cliente.apP}} {{cliente.apM}}<br>
+                          RFC: {{cliente.rfc}}<br>
+                          Dirección: {{cliente.calle}}, {{cliente.col}}. CP {{cliente.cp}} <br>
                         </p>
                       </div>
 
                       <div class="col"></div>
-                      <div class="col"></div>
 
                       <div class="col">
-                        <p><b>FACTURA:</b> FACT-001</p>
-                        <p><b>FECHA:</b> dd/mm/aaaa</p>
+                        <p><b>FACTURA:</b> FACT-{{venta.id}}</p>
+                        <p><b>FECHA:</b> {{venta.fecha}}</p>
                       </div>
                     </div>
 
@@ -39,32 +37,27 @@
                         <thead>
                           <tr>
                             <th scope="col">Cantidad</th>
-                            <th scope="col">Detalles</th>
+                            <th scope="col">Descripción</th>
                             <th scope="col">Precio Unitario</th>
                             <th scope="col">Precio Importe</th>
                           </tr>
                         </thead>
                         <tbody>
+                          {% for p in productos %}
                           <tr>
-                            <td>9999</td>
-                            <td>Lápiz</td>
-                            <td>$98</td>
-                            <td>$98</td>
+                            <td>{{p.cant}}</td>
+                            <td>{{p.desc}}</td>
+                            <td>{{p.precio}}</td>
+                            <td>{{p.preciotot}}</td>
                           </tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <div class="row mx-2">
-                      <table class="table">
-                        <thead>
+                          {% endfor %}
                           <tr>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col">Total</th>
-                            <th scope="col">5</th>
+                            <th scope="col">{{venta.pago}}</th>
                           </tr>
-                        </thead>
+                        </tbody>
                       </table>
                     </div>
                   </div>

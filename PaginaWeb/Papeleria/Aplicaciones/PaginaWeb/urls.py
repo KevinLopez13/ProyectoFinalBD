@@ -18,9 +18,13 @@ urlpatterns = [
     path('cliente/',views.cliente),
     path('clienteError/',views.clienteError),      
     path('validaCliente/', views.validaCliente),  
-    path('factura/<rfc>',views.factura),
+    path('factura/<int:idVenta>',views.factura),
     path('eliminacionArticulo/<int:codigo>', views.eliminar_Articulo),
     path('addCarrito/<int:codigo>', views.addCarrito),
     path('cancelarCompra/',views.cancelarCompra),
-    path('venta/<rfc>',views.venta)
+    path('venta/<rfc>',views.venta),
+    path('busquedaVenta/', views.busquedaVenta),
+    path('busquedaError/', views.busquedaError),
+    path('validaVenta/', views.validaVenta),
+    path('analisisVentasFecha/', views.analisisVentasFecha)
 ]

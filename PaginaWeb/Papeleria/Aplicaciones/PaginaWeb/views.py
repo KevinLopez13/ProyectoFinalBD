@@ -1,3 +1,4 @@
+from decimal import ConversionSyntax
 from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib import messages
@@ -80,6 +81,24 @@ def cancelarCompra(request):
 def analisisVentas(request):
     return render(request, 'analisisVentas.html')
 
+def analisisVentasFecha(request):
+    fecha1 = request.POST['fDateS']
+    fecha2 = request.POST['fDateE']
+    consultaSQL = None
+    desc = None
+    with connection.cursor() as cursor:
+        if fecha2 != '':
+            cursor.execute("SELECT retorna_pago_Final(%s,%s);",[fecha1, fecha2])
+        else:
+            cursor.execute("SELECT retorna_pago_Final(%s);",[fecha1])
+        consultaSQL = cursor.fetchone()
+    ganancia, = consultaSQL
+    
+    if ganancia != None:
+        return render(request, 'analisisVentas.html',{'fecha1':fecha1, 'fecha2':fecha2,'ganancia':ganancia})
+    else:
+        return redirect('/analisisVenta')   
+
 # Productos que tengan menos de 3 en stock
 def revisionInventario(request):
     consultaSQL = None
@@ -151,7 +170,7 @@ def tienda(request, cat):
     for p in productosSQL:
         productos.append( producto(p) )
     
-    return render(request, 'categoria.html',{'categoria':categ,'categorias':categorias, 'productos':productos})
+    return render(request, 'categoria.html',{'idcat':cat,'categoria':categ,'categorias':categorias, 'productos':productos})
 
 
 def cliente(request):
@@ -186,27 +205,51 @@ def venta(request, rfc):
         cursor.execute('INSERT INTO venta(pago_final,RFC) VALUES(%s,%s);',[pagoVenta, rfc])
         cursor.execute('SELECT id_Venta_Funcion();')
         idVenta, = cursor.fetchone()
-        print("Inserte venta", idVenta)
 
         for pr, li in miCarrito.canasta.items():
             print("Dentro for")
             pagoTotal = li[0]*li[1]
             try:
                 cursor.execute('INSERT INTO contiene(cod_Barras, id_Venta, precio_Total_Art, cantidad_Articulo) VALUES(%s,%s,%s,%s);',[int(pr), int(idVenta), float(pagoTotal) , li[0]])
-            #cursor.execute('INSERT INTO contiene VALUES(53206,24,90.8,10.5);')
             except:
-                print("Error: Venta cancelada")
                 cursor.execute('DELETE FROM VENTA WHERE id_Venta = %s;',[idVenta])
 
     miCarrito.drop()
-    return redirect('/factura/{}'.format(rfc))
+    return redirect('/factura/{}'.format(idVenta))
 
-def factura(request, rfc):
-    '''
-    rfc = request.POST['txtRFC']
+def busquedaVenta(request):
+    return render(request, 'busquedaVenta.html')
+
+def busquedaError(request):
+    return render(request, 'busquedaVentaError.html')
+
+def validaVenta(request):
+    idVenta = request.POST['txtidVenta']
+    idVentaResponse = False
+    # CONSULTA SQL
     with connection.cursor() as cursor:
-        cursor.execute('SELECT * FROM FACTURA WHERE RFC = %s;',[rfc])
-    '''
-    return render(request, 'factura.html')
+        cursor.execute("SELECT id_venta FROM  venta WHERE id_venta=%s;",[idVenta])
+        row = cursor.fetchone()
+        if row != None:
+            idVentaResponse = True
 
-#GEC85014014I1
+    if idVentaResponse:
+        return redirect('/factura/{}'.format(idVenta))
+    else:
+        return redirect('/busquedaError')
+
+def factura(request, idVenta):
+    consulta = None
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM FACTURA WHERE id_venta = %s;',[idVenta])
+        consulta = cursor.fetchall()
+        
+        c = consulta[0]
+        cliente = type('Cliente', (object,), dict(rfc=c[0], nom=c[1], apP=c[2], apM=c[3], cp=c[4], calle=c[5], col=c[6]))
+        venta = type('Venta', (object,), dict( id=c[7], fecha=c[8], pago=c[9] ))
+        productos = []
+        for p in consulta:
+            prod = type('Prod',(object,), dict(precio=p[10], cant=p[11], marca=p[12], desc=p[13], preciotot=p[11]*p[10]))
+            productos.append(prod)
+    return render(request, 'factura.html',{'cliente':cliente,'productos':productos, 'venta':venta})
+

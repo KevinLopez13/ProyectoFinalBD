@@ -11,14 +11,14 @@
             <div class="card border-primary py-2">
               <div class="card-body">
                 <p class="card-text">Ingrese una fecha o una fecha de inicio y una fecha de fin.</p>
-                <form action="/analisisVentas/" method="POST"> {% csrf_token %}
+                <form action="/analisisVentasFecha/" method="POST"> {% csrf_token %}
                   <div class="form-group mb-3">
                     <label for="floatingInput">Fecha de inicio</label>
-                    <input type="date" class="form-control" id="fDateS" placeholder="dd/mm/aaaa" required>
+                    <input type="date" class="form-control" name="fDateS" placeholder="dd/mm/aaaa" required>
                   </div>
                   <div class="form-group mb-3">
                         <label for="floatingInput">Fecha de fin</label>
-                        <input type="date" class="form-control" id="fDateE" placeholder="dd/mm/aaaa" >
+                        <input type="date" class="form-control" name="fDateE" placeholder="dd/mm/aaaa" >
                   </div>
                   <div class="d-grid gap-2 col-6 mx-auto">
                     <button class="btn btn-primary" type="submit"><i class="bi-calculator"></i> Calcular </button>
@@ -37,15 +37,13 @@
                         <thead>
                           <tr>
                             <th scope="col">Periodo de tiempo</th>
-                            <th scope="col">Cantidad vendida</th>
                             <th scope="col">Ganancia total</th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
-                            <td> 2020 / 2020</td>
-                            <td>58</td>
-                            <td>$6850</td>
+                            <td>{{fecha1}} {{fecha2}}</td>
+                            <td>${{ganancia}}</td>
                           </tr>
                         </tbody>
                       </table>

@@ -1,0 +1,56 @@
+{% extends "./base.html" %}
+
+{% block title %} Busqueda por id de venta {% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"> </div>
+        <div class="col-4">
+          <h3>Busqueda por venta</h3>
+          <div class="card py-2">
+              <div class=" card-body" >
+                    <form class="needs-validation" novalidate action="/validaVenta/" method="POST"> {% csrf_token %}
+                        <p>Ingrese el número de la factura:</p>
+                        <div class="form-group col">
+                          <div class="form-floating">
+                            <input type="text" name="txtidVenta" class="form-control" placeholder="Num. Factura" minlength="1" maxlength="3" required >
+                            <label for="floatingInput">Num. Factura</label>
+                          </div>
+                          <div class="input-group-btn my-3">
+                            <a href="/herramientas" class="btn btn-secondary">Regresar</a>  
+                            <button class="btn btn-primary" type="submit">Siguiente</button>
+                          </div>
+                        </div>
+                    </form>
+              </div>
+          </div>
+        </div>
+
+    </div>
+</div>
+{% block scripts %}
+
+{% endblock %}
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+  (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+  </script>
+{% endblock %}
