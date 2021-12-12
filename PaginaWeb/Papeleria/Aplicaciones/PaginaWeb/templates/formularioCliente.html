@@ -7,12 +7,12 @@
 <div class="card">
 <div class="card-body">
 <h3>Registro de cliente</h3>
-<form class="needs-validation" novalidate action="/formularioCliente/" method="post"> {% csrf_token %}
+<form class="needs-validation" action="/validaRegistroCliente/" method="POST">{% csrf_token %}
 
     <div class="form-group row mx-2">
       <div class="col-md-4 mb-3">
         <div class="form-floating">
-          <input type="text" class="form-control" name="txtNombre" id="fNombre" placeholder="Nombre" maxlength="32" required >
+          <input type="text" class="form-control" name="txtNombreform" id="txtNombre" placeholder="Nombre" maxlength="32" required >
           <label for="floatingInput">Nombre</label>
         </div>
       </div>
@@ -55,33 +55,39 @@
           <label for="floatingInput">Calle</label>
         </div>
       </div>
+      <div class="col-md-2 mb-3">
+        <div class="form-floating">
+          <input type="number" class="form-control" name="txtnum" id="txtnum" placeholder="Número" maxlength="4" required >
+          <label for="floatingInput">Número</label>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="form-floating">
+          <input type="number" class="form-control" name="txtCP" id="fCp" placeholder="Código postal" min="00000" max="32999" required >
+          <label for="floatingInput">Código postal</label>
+        </div>
+      </div>
+      
+    </div>
+    <div class="form-group row mx-2">
       <div class="col-md-6 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" name="txtColonia" id="fColonia" placeholder="Colonia"  maxlength="32" required >
           <label for="floatingInput">Colonia</label>
         </div>
       </div>
-    </div>
-    
-    <div class="form-group row mx-2">
       <div class="col-md-6 mb-3">
         <div class="form-floating">
           <input type="text" class="form-control" name="txtEstado" id="fEstado" placeholder="Estado" maxlength="32" required >
           <label for="floatingInput">Estado</label>
         </div>
       </div>
-      <div class="col-md-6 mb-3">
-        <div class="form-floating">
-          <input type="text" class="form-control" name="txtCP" id="fCp" placeholder="Código postal" minlength="5" maxlength="5" required >
-          <label for="floatingInput">Código postal</label>
-        </div>
-      </div>
+      
     </div>
     
 
     <button class="btn btn-primary mx-3" type="submit">Registrar</button>
   </form>
-  
   <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   (function() {
@@ -102,6 +108,9 @@
     }, false);
   })();
   </script>
+  {% block scripts %}
+
+  {% endblock %}
 </div>
 </div>
 

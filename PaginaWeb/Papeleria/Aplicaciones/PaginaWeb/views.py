@@ -11,24 +11,46 @@ miCarrito = carrito()
 def home(request):
     return render(request,'home.html')
 
+def formularioError(request):
+    return render(request, 'formularioError.html')
+
 def formularioCliente(request):
-    nombre = request.post['txtNombre']
-    apP = request.post['txtApP']
-    apM = request.post['txtApM']
-    rfc = request.post['txtRFC']
-    correo = request.post['emCorreo']
-    calle = request.post['txtCalle']
-    colonia = request.post['txtColonia']
-    estado = request.post['txtEstado']
-    cp = request.post['txtCP']
+    return render(request, 'formularioCliente.html')
+ 
+def validaRegistroCliente(request):
+    #is_private = request.POST.get('is_private', False)
+    nombre = request.POST['txtNombreform']
+    apP = request.POST['txtApP']
+    apM = request.POST['txtApM']
+    rfc = request.POST['txtRFC']
+    correo = request.POST['emCorreo']
+    calle = request.POST['txtCalle']
+    colonia = request.POST['txtColonia']
+    estado = request.POST['txtEstado']
+    numero = int(request.POST.get('txtNum',False))
+    cp = int(request.POST.get('txtCP',False))
+    
     with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO cliente VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s);",
-                    [rfc, nombre, apP, apM, cp, num])
-                    
-    return render(request,'formularioCliente.html')
+        try:
+            if len(apM) != 0:
+                cursor.execute("INSERT INTO cliente VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s);",
+                        [rfc, nombre, apP, apM, cp, numero, estado, calle, colonia])
+            else:
+                cursor.execute("INSERT INTO cliente VALUES(%s,%s,%s,NULL,%s,%s,%s,%s,%s);",
+                        [rfc, nombre, apP, cp, numero, estado, calle, colonia])
+        
+            cursor.execute("INSERT INTO correo VALUES(%s,%s);",[correo, rfc])
+        except:
+            cursor.execute("ROLLBACK;")
+            return redirect('/formularioError')
+
+    return redirect('/formularioCliente')
 
 def herramientas(request):
     return render(request,'herramientas.html')
+
+def utilidadError(request):
+    return render(request, 'utilidadError.html')
 
 # Utilidad
 def utilidadProducto(request):
@@ -49,9 +71,11 @@ def calculaUtilidad(request):
         desc, = desc
         return render(request, 'utilidadProducto.html',{'codigo':codigo,'descripcion':desc,'utilidad':util})
     else:
-        return render(request, 'utilidadProducto.html')
+        return redirect('/utilidadError')
     
-
+def cancelarCompra(request):
+    miCarrito.drop()
+    return redirect('/miCarrito')
 # 
 def analisisVentas(request):
     return render(request, 'analisisVentas.html')
@@ -73,21 +97,30 @@ def revisionInventario(request):
     return render(request, 'revInventario.html',{'productos':productos})
 
 # Modulos del carrito 
+
+def addCarrito(request, codigo):
+    precio = None
+    marca = None
+    desc = None
+    idCat = None
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM producto WHERE cod_Barras=%s;',[codigo])
+        cod, precio, marca, desc, idCat = cursor.fetchone()
+    precio = float(precio)
+
+    miCarrito.append(codigo, precio, desc)
+    return redirect('/tienda/0')
+
 def carrito(request):
     productos = []
+    for pr, li in miCarrito.canasta.items():
+        producto = type('Prod', (object, ), dict(codigo=pr, cant=li[0], precio=li[1], desc=li[2], total=li[1]*li[0]) )
+        productos.append(producto)
+    
+    return render(request, 'carrito.html',{'productos':productos})
 
-    return render(request, 'carrito.html')
-
-# Agregar al carrito
-def adgregarCarrito(request, codigo):
-    miCarrito.append(codigo)
-
-    return redirect('/miCarrito')
-
-def eliminar_Articulo(request):
-
-    #Trabajar aqui directamente con la BD mediante sentencias SQL
-
+def eliminar_Articulo(request, codigo):
+    miCarrito.remove(codigo)
     return redirect('/miCarrito')
 
 # Modulos de la vista de tienda
@@ -141,13 +174,39 @@ def validaCliente(request):
             #print("Response SQL:", rfcResponse)
 
     if rfcResponse:
-        #print("Cliente Encontrado")
-        return redirect('/factura')
+        return redirect('/venta/{}'.format(rfc))
     else:
-        # messages.warning(request,'Cliente no encontrado')
         return redirect('/clienteError')
-        #return redirect('/cliente')
+    
+def venta(request, rfc):
+    pagoVenta = miCarrito.compra()
+    idVenta = None
+    print(pagoVenta)
+    with connection.cursor() as cursor:
+        cursor.execute('INSERT INTO venta(pago_final,RFC) VALUES(%s,%s);',[pagoVenta, rfc])
+        cursor.execute('SELECT id_Venta_Funcion();')
+        idVenta, = cursor.fetchone()
+        print("Inserte venta", idVenta)
 
+        for pr, li in miCarrito.canasta.items():
+            print("Dentro for")
+            pagoTotal = li[0]*li[1]
+            try:
+                cursor.execute('INSERT INTO contiene(cod_Barras, id_Venta, precio_Total_Art, cantidad_Articulo) VALUES(%s,%s,%s,%s);',[int(pr), int(idVenta), float(pagoTotal) , li[0]])
+            #cursor.execute('INSERT INTO contiene VALUES(53206,24,90.8,10.5);')
+            except:
+                print("Error: Venta cancelada")
+                cursor.execute('DELETE FROM VENTA WHERE id_Venta = %s;',[idVenta])
 
-def factura(request):
+    miCarrito.drop()
+    return redirect('/factura/{}'.format(rfc))
+
+def factura(request, rfc):
+    '''
+    rfc = request.POST['txtRFC']
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM FACTURA WHERE RFC = %s;',[rfc])
+    '''
     return render(request, 'factura.html')
+
+#GEC85014014I1

@@ -12,13 +12,13 @@ INNER JOIN PRODUCTO ON CONTIENE.cod_Barras=PRODUCTO.cod_Barras;
 CREATE OR REPLACE FUNCTION menos_Thr() RETURNS TABLE (stock integer, marca varchar, descripcion varchar)
 AS $$
 DECLARE
-    v_stock integer;
-    nom_Marca varchar(120);
+v_stock integer;
+nom_Marca varchar(120);
 BEGIN
-    RETURN QUERY EXECUTE
-    'SELECT stock, marca, descripcion FROM guarda LEFT JOIN producto
-    ON guarda.cod_Barras=producto.cod_Barras 
-    WHERE stock <= 3';
+RETURN QUERY EXECUTE
+'SELECT stock, marca, descripcion FROM guarda LEFT JOIN producto
+ON guarda.cod_Barras=producto.cod_Barras 
+WHERE stock <= 3';
 END;
 $$
 LANGUAGE plpgsql;
@@ -29,36 +29,36 @@ CREATE OR REPLACE FUNCTION id_Venta_Funcion() RETURNS integer
 AS
 $$
 DECLARE 
-    V_id integer;
+V_id integer;
 BEGIN
-    SELECT last_value INTO V_id FROM VENT;
-    RETURN V_id;
-END;
+SELECT last_value INTO V_id FROM VENT;
+RETURN V_id;
+end;
 $$
 LANGUAGE plpgsql;
 
 
 --Procedimiento para verificar stock
 CREATE OR REPLACE FUNCTION venta() RETURNS TRIGGER AS $existe$
-DECLARE
-    decremento integer;
+DECLARE decremento integer;
 BEGIN 
-    decremento= new.cantidad_Articulo;
-    IF (select stock FROM guarda WHERE cod_Barras = NEW.cod_Barras) < decremento THEN 
-        raise notice 'No hay suficiente producto';
-        ROLLBACK; 
-        RETURN stock;
-    END IF;
-    IF (select stock FROM guarda where cod_Barras = NEW.cod_Barras ) >= decremento THEN
-        UPDATE guarda SET stock= ((SELECT stock FROM guarda WHERE cod_Barras=NEW.cod_Barras) - decremento) WHERE cod_Barras = NEW.cod_Barras;
-        IF (select stock FROM guarda where  cod_Barras = NEW.cod_Barras ) <= 3 THEN
-            raise notice 'stock actualizado, REVISE SU INVENTARIO';
-        END IF;
-        RETURN NULL;
-    END IF; 
-    RETURN NULL;
+decremento= new.cantidad_Articulo;
+IF (select stock FROM guarda WHERE cod_Barras = NEW.cod_Barras) < decremento THEN 
+raise notice 'No hay suficiente producto';
+ROLLBACK;
+RETURN stock;
+END IF;
+IF (select stock FROM guarda where cod_Barras = NEW.cod_Barras ) >= decremento THEN
+UPDATE guarda SET stock= ((SELECT stock FROM guarda WHERE cod_Barras=NEW.cod_Barras) - decremento) WHERE cod_Barras = NEW.cod_Barras;
+IF (select stock FROM guarda where  cod_Barras = NEW.cod_Barras ) <= 3 THEN
+raise notice 'stock actualizado, REVISE SU INVENTARIO';
+END IF;
+RETURN NULL;
+END IF; 
+RETURN NULL;
 END;
 $existe$ LANGUAGE plpgsql;
+
 
 
 --FUNTCION para la utilidad de cada producto
@@ -154,7 +154,7 @@ LANGUAGE plpgsql;
 
 
 --Trigger para venta
-CREATE TRIGGER venta_trigger before INSERT
+CREATE TRIGGER venta_trigger AFTER INSERT
 ON CONTIENE FOR EACH ROW
 EXECUTE PROCEDURE venta();
 
