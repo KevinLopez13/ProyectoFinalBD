@@ -16,11 +16,14 @@
 \BOOKMARK [1][-]{section.4}{Implementaci\363n}{}% 16
 \BOOKMARK [2][-]{subsection.4.1}{Modelo f\355sico}{section.4}% 17
 \BOOKMARK [3][-]{subsubsection.4.1.1}{IaaS}{subsection.4.1}% 18
-\BOOKMARK [2][-]{subsection.4.2}{C\363digos}{section.4}% 19
-\BOOKMARK [2][-]{subsection.4.3}{DDL}{section.4}% 20
-\BOOKMARK [1][-]{section.5}{Presentaci\363n}{}% 21
-\BOOKMARK [2][-]{subsection.5.1}{Django}{section.5}% 22
-\BOOKMARK [3][-]{subsubsection.5.1.1}{Mapeo Relacional de Objetos}{subsection.5.1}% 23
-\BOOKMARK [3][-]{subsubsection.5.1.2}{Ejecutar SQL personalizado directamente}{subsection.5.1}% 24
-\BOOKMARK [2][-]{subsection.5.2}{Dise\361o}{section.5}% 25
-\BOOKMARK [1][-]{section.6}{Conclusiones}{}% 26
+\BOOKMARK [2][-]{subsection.4.2}{DDL}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.3}{DML}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.4}{Funciones}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.5}{Trigger}{section.4}% 22
+\BOOKMARK [2][-]{subsection.4.6}{\355ndice Tabla}{section.4}% 23
+\BOOKMARK [1][-]{section.5}{Presentaci\363n}{}% 24
+\BOOKMARK [2][-]{subsection.5.1}{Django}{section.5}% 25
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Mapeo Relacional de Objetos}{subsection.5.1}% 26
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Ejecutar SQL personalizado directamente}{subsection.5.1}% 27
+\BOOKMARK [2][-]{subsection.5.2}{Dise\361o}{section.5}% 28
+\BOOKMARK [1][-]{section.6}{Conclusiones}{}% 29

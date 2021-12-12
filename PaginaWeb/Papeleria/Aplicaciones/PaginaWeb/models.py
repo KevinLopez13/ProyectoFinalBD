@@ -10,20 +10,6 @@ class producto():
         self.descripcion = registro[3]
         self.id_cat = registro[4]
 
-class venta():
-    def __init__(self, id_Venta, rfc):
-        self.id_venta = id_Venta
-        self.fecha_Venta = None
-        self.pago_Final = None
-        self.rfc = rfc
-
-class contiene():
-    def __init__(self):
-        self.codigo = None
-        self.id_Venta = None
-        self.precio_Total_Art = {}
-        self.cantidad_Articulo = {}
-
 class carrito():
     def __init__(self):
         self.canasta = {}
